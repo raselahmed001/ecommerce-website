@@ -2,11 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-<<<<<<< HEAD
-
-=======
-use \Log;
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Models\Admin\Brand;
@@ -24,7 +19,6 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-<<<<<<< HEAD
     public function index(Request $request)
     {
 //        $query = Product::select('id')->with('category:id,category_name', 'brand:id,brand_name')->orderBy('id', 'desc');
@@ -60,12 +54,6 @@ class ProductController extends Controller
         // Pass filter values back to view to maintain state
         $data['filters'] = $request->only(['status', 'main_slider', 'hot_deal', 'best_rated', 'mid_slider', 'hot_new', 'trendy']);
 
-=======
-    public function index()
-    {
-        $data['products'] = Product::with('category', 'brand')->orderBy('id', 'desc')->get();
-//        return response()->json($data);
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
         return view('admin.product.index', $data);
     }
 
@@ -81,13 +69,8 @@ class ProductController extends Controller
                 ->orderBy('category_name')
                 ->get(),
             'brands' => Brand::select('id', 'brand_name')->orderBy('brand_name')->get(),
-<<<<<<< HEAD
             'subcategories' => collect()
 //            'subcategories' => SubCategory::select('id', 'sub_category_name')->orderBy('sub_category_name')->get(),
-=======
-//            'subcategories' => collect()
-            'subcategories' => SubCategory::select('id', 'sub_category_name')->orderBy('sub_category_name')->get(),
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
         ]);
     }
 
@@ -100,16 +83,9 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-<<<<<<< HEAD
     public function store(ProductRequest $request)
     {
 //        dd($request->all());
-=======
-
-
-    public function store(ProductRequest $request)
-    {
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
         DB::beginTransaction();
         try {
             $validated = $request->validated();
@@ -177,11 +153,7 @@ class ProductController extends Controller
                 'redirect' => route('admin.products.index'),
                 'toastr' => [
                     'type' => 'success',
-<<<<<<< HEAD
                     'title' => 'Insert',
-=======
-                    'title' => 'Success',
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
                     'message' => 'Product added successfully'
                 ]
             ]);
@@ -245,7 +217,6 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-<<<<<<< HEAD
 //        $product->load([
 //            'category',
 //            'subCategory',
@@ -255,9 +226,6 @@ class ProductController extends Controller
 
 
         return view('admin.product.show', compact('product'));
-=======
-        //
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
     }
 
     /**
@@ -271,11 +239,7 @@ class ProductController extends Controller
             'brands' => Brand::select('id', 'brand_name')->orderBy('brand_name')->get(),
             'subcategories' => SubCategory::where('category_id', $product->category_id)
                 ->select('id', 'sub_category_name')
-<<<<<<< HEAD
                 ->get(),
-=======
-                ->get()
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
         ]);
     }
 
@@ -283,7 +247,6 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-<<<<<<< HEAD
     public function update(ProductRequest $request, Product $product)
     {
         DB::beginTransaction();
@@ -373,11 +336,6 @@ class ProductController extends Controller
                 'message' => 'Operation failed'
             ]
         ], 500);
-=======
-    public function update(Request $request, Product $product)
-    {
-        //
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
     }
 
     /**
@@ -385,7 +343,6 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-<<<<<<< HEAD
         try {
             // Delete the image file from storage
             $this->deleteImage($product->image);
@@ -404,8 +361,4 @@ class ProductController extends Controller
         }
     }
 
-=======
-        //
-    }
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
 }

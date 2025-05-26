@@ -16,19 +16,12 @@ class SubCategoryController extends Controller
     public function index()
     {
         $data['categories'] = Category::select('id', 'category_name')->get();
-<<<<<<< HEAD
 //        $data['subcategories'] = SubCategory::with('category')
 //            ->select('id', 'sub_category_name', 'category_id')
 //            ->latest()
 //            ->get();
         $data['subcategories'] = SubCategory::all()->withRelationshipAutoloading();
 
-=======
-        $data['subcategories'] = SubCategory::with('category')
-            ->select('id', 'sub_category_name', 'category_id')
-            ->latest()
-            ->paginate(10);
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
         return view('admin.subcategory.index', $data);
     }
 
