@@ -54,6 +54,10 @@
 </div>
 
 @push('scripts')
+<<<<<<< HEAD
+    <script>
+        $(document).ready(function () {
+=======
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -64,6 +68,7 @@
                 "positionClass": "toast-top-right",
                 "timeOut": "2000"
             };
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
 
             // Handle add button click
             $('#kt_modal_add').click(function () {
@@ -72,7 +77,11 @@
                 $('#form_method').val('POST');
                 $('#kt_modal_form').attr('action', "{{ route('admin.categories.store') }}");
                 $('#category_name').val('');
+<<<<<<< HEAD
+                CommonFormHandlers.clearValidationErrors();
+=======
                 clearValidationErrors();
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
             });
 
             // Handle edit button click
@@ -83,7 +92,11 @@
                 $('#submit_button_text').text('Update');
                 $('#form_method').val('PUT');
                 $('#kt_modal_form').attr('action', '/admin/categories/' + categoryId);
+<<<<<<< HEAD
+                CommonFormHandlers.clearValidationErrors();
+=======
                 clearValidationErrors();
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
 
                 // Fetch category data via AJAX
                 $.ajax({
@@ -107,6 +120,10 @@
                 });
             });
 
+<<<<<<< HEAD
+        });
+
+=======
             // Clear all validation errors
             function clearValidationErrors() {
                 $('.is-invalid').removeClass('is-invalid');
@@ -206,6 +223,7 @@
                     }
                 });
         });
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
     </script>
 
 @endpush

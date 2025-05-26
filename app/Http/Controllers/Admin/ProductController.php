@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+<<<<<<< HEAD
+
+=======
 use \Log;
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Models\Admin\Brand;
@@ -20,10 +24,48 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
+<<<<<<< HEAD
+    public function index(Request $request)
+    {
+//        $query = Product::select('id')->with('category:id,category_name', 'brand:id,brand_name')->orderBy('id', 'desc');
+        $query = Product::all()->withRelationshipAutoloading();
+
+        // Status filter
+        if ($request->has('status') && in_array($request->status, ['0', '1'])) {
+            $query->where('status', $request->status);
+        }
+
+        // Product type filters
+        if ($request->has('main_slider') && $request->main_slider == '1') {
+            $query->where('main_slider', 1);
+        }
+        if ($request->has('hot_deal') && $request->hot_deal == '1') {
+            $query->where('hot_deal', 1);
+        }
+        if ($request->has('best_rated') && $request->best_rated == '1') {
+            $query->where('best_rated', 1);
+        }
+        if ($request->has('mid_slider') && $request->mid_slider == '1') {
+            $query->where('mid_slider', 1);
+        }
+        if ($request->has('hot_new') && $request->hot_new == '1') {
+            $query->where('hot_new', 1);
+        }
+        if ($request->has('trendy') && $request->trendy == '1') {
+            $query->where('trendy', 1);
+        }
+
+        $data['products'] = $query->all();
+
+        // Pass filter values back to view to maintain state
+        $data['filters'] = $request->only(['status', 'main_slider', 'hot_deal', 'best_rated', 'mid_slider', 'hot_new', 'trendy']);
+
+=======
     public function index()
     {
         $data['products'] = Product::with('category', 'brand')->orderBy('id', 'desc')->get();
 //        return response()->json($data);
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
         return view('admin.product.index', $data);
     }
 
@@ -39,8 +81,13 @@ class ProductController extends Controller
                 ->orderBy('category_name')
                 ->get(),
             'brands' => Brand::select('id', 'brand_name')->orderBy('brand_name')->get(),
+<<<<<<< HEAD
+            'subcategories' => collect()
+//            'subcategories' => SubCategory::select('id', 'sub_category_name')->orderBy('sub_category_name')->get(),
+=======
 //            'subcategories' => collect()
             'subcategories' => SubCategory::select('id', 'sub_category_name')->orderBy('sub_category_name')->get(),
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
         ]);
     }
 
@@ -53,10 +100,16 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+<<<<<<< HEAD
+    public function store(ProductRequest $request)
+    {
+//        dd($request->all());
+=======
 
 
     public function store(ProductRequest $request)
     {
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
         DB::beginTransaction();
         try {
             $validated = $request->validated();
@@ -124,7 +177,11 @@ class ProductController extends Controller
                 'redirect' => route('admin.products.index'),
                 'toastr' => [
                     'type' => 'success',
+<<<<<<< HEAD
+                    'title' => 'Insert',
+=======
                     'title' => 'Success',
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
                     'message' => 'Product added successfully'
                 ]
             ]);
@@ -188,7 +245,19 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
+<<<<<<< HEAD
+//        $product->load([
+//            'category',
+//            'subCategory',
+//            'brand'
+//        ]);
+        $product->withRelationshipAutoloading();
+
+
+        return view('admin.product.show', compact('product'));
+=======
         //
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
     }
 
     /**
@@ -202,7 +271,11 @@ class ProductController extends Controller
             'brands' => Brand::select('id', 'brand_name')->orderBy('brand_name')->get(),
             'subcategories' => SubCategory::where('category_id', $product->category_id)
                 ->select('id', 'sub_category_name')
+<<<<<<< HEAD
+                ->get(),
+=======
                 ->get()
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
         ]);
     }
 
@@ -210,9 +283,101 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
+<<<<<<< HEAD
+    public function update(ProductRequest $request, Product $product)
+    {
+        DB::beginTransaction();
+
+        try {
+            $validated = $request->validated();
+            $imagePaths = [];
+            $imageFields = ['image_one', 'image_two', 'image_three'];
+
+            foreach ($imageFields as $field) {
+                // Handle image removal
+                if ($request->has($field.'_remove') && $request->input($field.'_remove') == '1') {
+                    $this->deleteImage($product->$field);
+                    $imagePaths[$field] = null;
+                }
+                // Handle new image upload
+                elseif ($request->hasFile($field)) {
+                    $this->deleteImage($product->$field);
+                    $imagePaths[$field] = $this->storeImage(
+                        $request->file($field),
+                        $validated['product_name']
+                    );
+                }
+                // Keep existing image
+                else {
+                    $imagePaths[$field] = $product->$field;
+                }
+            }
+
+            // Prepare and update product data
+            $product->update(array_merge($validated, $imagePaths));
+
+            DB::commit();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Product updated successfully',
+                'redirect' => route('admin.products.index'),
+                'toastr' => [
+                    'type' => 'success',
+                    'title' => 'Success',
+                    'message' => 'Product updated successfully'
+                ]
+            ]);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return $this->jsonError($e->getMessage());
+        }
+    }
+
+    private function storeImage($image, $productName)
+    {
+        $filename = Str::slug($productName).'-'.time().'-'.Str::random(5).'.'.$image->getClientOriginalExtension();
+        $path = 'uploads/images/product/';
+
+        $fullPath = public_path($path);
+        if (!file_exists($fullPath)) {
+            mkdir($fullPath, 0777, true);
+        }
+
+        Image::read($image->getRealPath())
+            ->resize(300, 300, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })
+            ->save($fullPath.$filename);
+
+        return $path.$filename;
+    }
+
+    private function deleteImage($path)
+    {
+        if ($path && file_exists(public_path($path))) {
+            @unlink(public_path($path));
+        }
+    }
+
+    private function jsonError($message)
+    {
+        return response()->json([
+            'success' => false,
+            'message' => 'Error: '.$message,
+            'toastr' => [
+                'type' => 'error',
+                'title' => 'Error',
+                'message' => 'Operation failed'
+            ]
+        ], 500);
+=======
     public function update(Request $request, Product $product)
     {
         //
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
     }
 
     /**
@@ -220,6 +385,27 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+<<<<<<< HEAD
+        try {
+            // Delete the image file from storage
+            $this->deleteImage($product->image);
+
+            // Delete the product from the database
+            $product->delete();
+
+            return redirect()->route('admin.products.index')->with('toastr', [
+                'type' => 'success',
+                'message' => 'Product deleted successfully',
+                'title' => 'Deleted'
+            ]);
+
+        } catch (\Exception $e) {
+            return $this->jsonError($e->getMessage());
+        }
+    }
+
+=======
         //
     }
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
 }

@@ -17,7 +17,11 @@ class BrandController extends Controller
      */
     public function index()
     {
+<<<<<<< HEAD
+        $data['brands'] = Brand::select('id','brand_name','brand_logo')->get();
+=======
         $data['brands'] = Brand::all();
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
         return view('admin.brand.index', $data);
     }
 
@@ -57,6 +61,21 @@ class BrandController extends Controller
 
         try {
             DB::beginTransaction();
+<<<<<<< HEAD
+            // Handle file upload
+            $image = $request->file('brand_logo');
+            $imageName = time() . '-' . $image->getClientOriginalName();
+            // Define paths
+            $mainPath = public_path('uploads/images/brand/');
+            // Ensure directories exist
+            File::ensureDirectoryExists($mainPath, 0755);
+            // Process image
+            $image = Image::read($image->getRealPath());
+            // Save main image
+            $image->save($mainPath . $imageName);
+            // Create brand
+            Brand::create([
+=======
 
             // Handle file upload
             $image = $request->file('brand_logo');
@@ -79,6 +98,7 @@ class BrandController extends Controller
 
             // Create brand
             $brand = Brand::create([
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
                 'brand_name' => $request->brand_name,
                 'brand_logo' => $imageName,
             ]);
@@ -176,6 +196,19 @@ class BrandController extends Controller
                 'brand_name' => $request->brand_name,
             ];
 
+<<<<<<< HEAD
+            if ($request->hasFile('brand_logo')) {
+                $image = $request->file('brand_logo');
+                $imageName = time() . '-' . $image->getClientOriginalName();
+                // Define paths
+                $mainPath = public_path('uploads/images/brand/');
+                // Ensure directories exist
+                File::ensureDirectoryExists($mainPath, 0755);
+                // Process image
+                $image = Image::read($image->getRealPath());
+                // Save main image
+                $image->save($mainPath . $imageName);
+=======
 
             if ($request->hasFile('brand_logo')) {
                 $image = $request->file('brand_logo');
@@ -196,11 +229,18 @@ class BrandController extends Controller
                 $image->save($mainPath . $imageName);
 
 
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
                 // Delete old images before updating
                 if ($brand->brand_logo) {
                     @unlink($mainPath . $brand->brand_logo);
                     @unlink($brand->brand_logo);
                 }
+<<<<<<< HEAD
+                $data['brand_logo'] = $imageName;
+            }
+            $brand->update($data);
+            DB::commit();
+=======
 
                 $data['brand_logo'] = $imageName;
             }
@@ -210,6 +250,7 @@ class BrandController extends Controller
 
             DB::commit();
 
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
             return response()->json([
                 'success' => true,
                 'toastr' => [
@@ -246,11 +287,44 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
+<<<<<<< HEAD
+        try {
+            DB::beginTransaction();
+
+            // Delete the logo file if it exists
+            if ($brand->brand_logo) {
+                $logoPath = public_path('uploads/images/brand/') . $brand->brand_logo;
+
+                // Check if file exists and is not the default placeholder
+                if (file_exists($logoPath) && !str_contains($brand->brand_logo, 'blank-image.svg')) {
+                    unlink($logoPath);
+                }
+            }
+            // Delete the brand record
+            $brand->delete();
+            DB::commit();
+            return redirect()->route('admin.brands.index')->with('toastr', [
+                'type' => 'success',
+                'message' => 'Brand deleted successfully',
+                'title' => 'Brand Success'
+            ]);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return redirect()->back()->with('toastr', [
+                'type' => 'error',
+                'message' => 'Failed to delete brand: ' . $e->getMessage(),
+                'title' => 'Error'
+            ]);
+        }
+=======
         $brand->delete();
         return redirect()->route('admin.brands.index')->with('toastr', [
             'type' => 'success',
             'message' => 'Brand deleted successfully',
             'title' => 'Brand Success'
         ]);
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
     }
 }

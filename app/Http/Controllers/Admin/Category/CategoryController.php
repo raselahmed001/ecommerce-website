@@ -16,7 +16,12 @@ class CategoryController extends Controller
     public function index()
     {
 
+<<<<<<< HEAD
+//        $data['categories'] = Category::all();
+        $data['categories'] = Category::select('id', 'category_name')->get();
+=======
         $data['categories'] = Category::all();
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
         return view('admin.category.index', $data);
     }
 

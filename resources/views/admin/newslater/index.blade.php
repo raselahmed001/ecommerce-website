@@ -180,6 +180,8 @@
 
 @endsection
 
+<<<<<<< HEAD
+=======
 @push('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
     <script src="{{ asset('js/common-form-handlers.js') }}"></script>
@@ -201,4 +203,5 @@
     </script>
 
 @endpush
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
 

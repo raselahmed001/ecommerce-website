@@ -57,13 +57,97 @@
                          id="kt_menu_624475cf75c38">
                         <!--begin::Header-->
                         <div class="px-7 py-5">
+<<<<<<< HEAD
+                            <div class="fs-5 text-dark fw-bolder">Product Filters</div>
+=======
                             <div class="fs-5 text-dark fw-bolder">Filter Options</div>
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
                         </div>
                         <!--end::Header-->
                         <!--begin::Menu separator-->
                         <div class="separator border-gray-200"></div>
                         <!--end::Menu separator-->
                         <!--begin::Form-->
+<<<<<<< HEAD
+                        <form method="GET" action="{{ route('admin.products.index') }}">
+                            <div class="px-7 py-5">
+                                <!--begin::Input group-->
+                                <div class="mb-10">
+                                    <!--begin::Label-->
+                                    <label class="form-label fw-bold">Status:</label>
+                                    <!--end::Label-->
+                                    <!--begin::Input-->
+                                    <div>
+                                        <select class="form-select form-select-solid" name="status"
+                                                data-kt-select2="true" data-placeholder="Select status">
+                                            <option value="">All Statuses</option>
+                                            <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>Active
+                                            </option>
+                                            <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>
+                                                Inactive
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <!--end::Input-->
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="mb-10">
+                                    <!--begin::Label-->
+                                    <label class="form-label fw-bold">Product Types:</label>
+                                    <!--end::Label-->
+                                    <!--begin::Options-->
+                                    <div class="d-flex flex-column">
+                                        <label class="form-check form-check-sm form-check-custom form-check-solid mb-3">
+                                            <input class="form-check-input" type="checkbox" name="main_slider" value="1"
+                                                {{ request('main_slider') == '1' ? 'checked' : '' }}/>
+                                            <span class="form-check-label">Main Slider</span>
+                                        </label>
+                                        <label class="form-check form-check-sm form-check-custom form-check-solid mb-3">
+                                            <input class="form-check-input" type="checkbox" name="hot_deal" value="1"
+                                                {{ request('hot_deal') == '1' ? 'checked' : '' }}/>
+                                            <span class="form-check-label">Hot Deal</span>
+                                        </label>
+                                        <label class="form-check form-check-sm form-check-custom form-check-solid mb-3">
+                                            <input class="form-check-input" type="checkbox" name="best_rated" value="1"
+                                                {{ request('best_rated') == '1' ? 'checked' : '' }}/>
+                                            <span class="form-check-label">Best Rated</span>
+                                        </label>
+                                        <label class="form-check form-check-sm form-check-custom form-check-solid mb-3">
+                                            <input class="form-check-input" type="checkbox" name="mid_slider" value="1"
+                                                {{ request('mid_slider') == '1' ? 'checked' : '' }}/>
+                                            <span class="form-check-label">Mid Slider</span>
+                                        </label>
+                                        <label class="form-check form-check-sm form-check-custom form-check-solid mb-3">
+                                            <input class="form-check-input" type="checkbox" name="hot_new" value="1"
+                                                {{ request('hot_new') == '1' ? 'checked' : '' }}/>
+                                            <span class="form-check-label">Hot New</span>
+                                        </label>
+                                        <label class="form-check form-check-sm form-check-custom form-check-solid">
+                                            <input class="form-check-input" type="checkbox" name="trendy" value="1"
+                                                {{ request('trendy') == '1' ? 'checked' : '' }}/>
+                                            <span class="form-check-label">Trendy</span>
+                                        </label>
+                                    </div>
+                                    <!--end::Options-->
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Actions-->
+                                <div class="d-flex justify-content-end">
+                                    <a href="{{ route('admin.products.index') }}"
+                                       class="btn btn-sm btn-light btn-active-light-primary me-2">
+                                        Reset
+                                    </a>
+                                    <button type="submit" class="btn btn-sm btn-primary">
+                                        Apply
+                                    </button>
+                                </div>
+                                <!--end::Actions-->
+                            </div>
+                        </form>
+=======
                         <div class="px-7 py-5">
                             <!--begin::Input group-->
                             <div class="mb-10">
@@ -126,6 +210,7 @@
                             </div>
                             <!--end::Actions-->
                         </div>
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
                         <!--end::Form-->
                     </div>
                     <!--end::Menu 1-->
@@ -279,7 +364,11 @@
                                         </span>
 
                                     </a>
+<<<<<<< HEAD
+
+=======
                                     {{--                                    test--}}
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
                                     <div
                                         class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
                                         data-kt-menu="true">
@@ -312,7 +401,11 @@
                                                         class="d-flex justify-content-center align-items-center btn btn-sm
                                                           {{ $product->status ? 'btn-light-warning' : 'btn-light-success' }}
                                                           text-hover-white"
+<<<<<<< HEAD
+                                                        style="height: 30px; width: 100px;">
+=======
                                                         style="height: 30px; width: 100px;" >
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
                                                     <i class="bi {{ $product->status ? 'bi-x-circle' : 'bi-check-circle' }} me-1"></i>
                                                     {{ $product->status ? 'Deactivate' : 'Activate' }}
                                                 </button>
@@ -352,12 +445,21 @@
                 <!--end::Card body-->
             </div>
             <!--end::Category-->
+<<<<<<< HEAD
+        </div>
+=======
         </div>ñ
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
         <!--end::Container-->
     </div>
     <!--end::Post-->
 
 @endsection
+<<<<<<< HEAD
+
+
+
+=======
 @push('scripts')
 
     @if(Session::has('toastr'))
@@ -380,3 +482,4 @@
         </script>
     @endif
 @endpush
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
