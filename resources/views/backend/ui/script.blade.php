@@ -7,10 +7,6 @@
 <script src="{{ asset('backend/assets/plugins/global/plugins.bundle.js') }}"></script>
 <script src="{{ asset('backend/assets/js/scripts.bundle.js') }}"></script>
 <!--end::Global Javascript Bundle-->
-<<<<<<< HEAD
-=======
-
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
 <!--begin::Page Vendors Javascript(used by this page)-->
 <script src="{{ asset('backend/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js') }}"></script>
 <script src="{{ asset('backend/assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
@@ -29,7 +25,6 @@
 <script src="{{ asset('backend/assets/js/custom/apps/ecommerce/catalog/save-product.js') }}"></script>
 <script src="{{ asset('backend/assets/plugins/custom/formrepeater/formrepeater.bundle.js') }}"></script>
 
-<<<<<<< HEAD
 
 <script src="{{ asset('backend/assets/js/custom/documentation/forms/select2.js') }}"></script>
 
@@ -60,39 +55,6 @@
         "{{ Session::get('toastr.message') }}",
         "{{ Session::get('toastr.title', '') }}"
     );
-=======
-<script src="{{ asset('backend/assets/js/custom/documentation/forms/select2.js') }}"></script>
-
-<!-- Toastr JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></>
-
-
-<script>
-
-    toastr.options = {
-        "closeButton": false,
-        "debug": false,
-        "newestOnTop": false,
-        "progressBar": true,
-        "positionClass": "toastr-top-right",
-        "preventDuplicates": false,
-        "onclick": null,
-        "showDuration": "300",
-        "hideDuration": "1000",
-        "timeOut": "5000",
-        "extendedTimeOut": "1000",
-        "showEasing": "swing",
-        "hideEasing": "linear",
-        "showMethod": "fadeIn",
-        "hideMethod": "fadeOut"
-        };
-
-    @if(Session::has('toastr'))
-        toastr.{{ Session::get('toastr.type') }}(
-            "{{ Session::get('toastr.message') }}",
-            "{{ Session::get('toastr.title', '') }}"
-        );
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
     @endif
 </script>
 
@@ -101,10 +63,7 @@
 
 
 
-<<<<<<< HEAD
 
 
 
 
-=======
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
