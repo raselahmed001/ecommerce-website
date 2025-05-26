@@ -3,10 +3,7 @@
 namespace App\Http\Requests;
 
 use \Illuminate\Contracts\Validation\Validator;
-<<<<<<< HEAD
 use Illuminate\Validation\Rule;
-=======
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
 use \Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -29,16 +26,12 @@ class SubCategoryRequest extends FormRequest
     {
         return [
             'category_id' => 'required|exists:categories,id',
-<<<<<<< HEAD
             'sub_category_name' => [
                 'required',
                 'string',
                 'max:255',
                 Rule::unique('sub_categories', 'sub_category_name')->ignore($this->subcategory),
             ],
-=======
-            'sub_category_name' => 'required|string|max:255|unique:sub_categories,sub_category_name'
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
         ];
     }
 
