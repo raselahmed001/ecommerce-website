@@ -25,7 +25,6 @@ const CommonFormHandlers = {
             e.preventDefault();
             var form = $(this);
             var submitButton = $(submitButtonSelector);
-<<<<<<< HEAD
             // var formData = form.serialize();
             var formData = new FormData(this);
             var formAction = form.attr("action");
@@ -35,13 +34,6 @@ const CommonFormHandlers = {
                 formData.append("_method", "PUT");
             }
 
-=======
-            var formData = form.serialize();
-            // var formData = new FormData(this);
-            var formAction = form.attr("action");
-            var formMethod = $("#form_method").val();
-
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
             submitButton.prop("disabled", true);
             submitButton.find(".indicator-label").hide();
             submitButton.find(".indicator-progress").show();
@@ -49,17 +41,12 @@ const CommonFormHandlers = {
 
             $.ajax({
                 url: formAction,
-<<<<<<< HEAD
                 // type: formMethod === "POST" ? "POST" : "PUT",
                 type: "POST",
                 data: formData,
 
                 processData: false, // ফাইল আপলোডের জন্য জরুরি
                 contentType: false,
-=======
-                type: formMethod === "POST" ? "POST" : "PUT",
-                data: formData,
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
                 success: function (response) {
                     if (response.success) {
                         if (response.toastr) {
@@ -88,7 +75,6 @@ const CommonFormHandlers = {
                             );
                         }
                         $.each(response.errors, function (field, messages) {
-<<<<<<< HEAD
                             if (field === "brand_logo") {
                                 // Special handling for image input
                                 $(".image-input").addClass("is-invalid");
@@ -104,15 +90,6 @@ const CommonFormHandlers = {
                                     .find(".invalid-feedback-server")
                                     .text(messages[0]);
                             }
-=======
-                            var input = $('[name="' + field + '"]');
-                            input.addClass("is-invalid");
-                            // input.closest('.fv-row').find('.invalid-feedback-server').text(messages[0]);
-                            input
-                                .closest(".form-floating")
-                                .find(".invalid-feedback-server")
-                                .text(messages[0]);
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
                         });
                     } else {
                         toastr.error(
@@ -158,12 +135,7 @@ const CommonFormHandlers = {
             const submitButton = $(submitButtonSelector);
             const formData = new FormData(this);
             const formAction = form.attr("action");
-<<<<<<< HEAD
             const formMethod = "POST";
-=======
-            const formMethod =
-                form.find('input[name="_method"]').val() || "POST";
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
 
             // Disable button and show loading
             submitButton.prop("disabled", true);
@@ -178,15 +150,12 @@ const CommonFormHandlers = {
                 data: formData,
                 processData: false,
                 contentType: false,
-<<<<<<< HEAD
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
                         "content",
                     ),
                     Accept: "application/json",
                 },
-=======
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
                 success: function (response) {
                     if (response.success) {
                         if (response.toastr) {

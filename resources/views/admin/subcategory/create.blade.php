@@ -65,21 +65,8 @@
 </div>
 
 @push('scripts')
-<<<<<<< HEAD
     <script>
         $(document).ready(function () {
-=======
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            // Initialize Toastr
-            toastr.options = {
-                "closeButton": true,
-                "progressBar": true,
-                "positionClass": "toast-top-right",
-                "timeOut": "2000"
-            };
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
 
             // Handle add button click
             $('#kt_modal_add').click(function () {
@@ -89,11 +76,7 @@
                 $('#kt_modal_form').attr('action', "{{ route('admin.subcategories.store') }}");
                 $('#sub_category_name').val('');
                 $('#category_id').val('');
-<<<<<<< HEAD
                 CommonFormHandlers.clearValidationErrors();
-=======
-                clearValidationErrors();
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
             });
 
             // Handle edit button click
@@ -104,11 +87,7 @@
                 $('#submit_button_text').text('Update');
                 $('#form_method').val('PUT');
                 $('#kt_modal_form').attr('action', '/admin/subcategories/' + subCategoryId);
-<<<<<<< HEAD
                 CommonFormHandlers.clearValidationErrors();
-=======
-                clearValidationErrors();
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
 
                 $('#kt_modal_submit').prop('disabled', true).find('.indicator-progress').show();
 
@@ -137,111 +116,8 @@
                     }
                 });
             });
-<<<<<<< HEAD
         });
 
-=======
-
-            // Clear all validation errors
-            function clearValidationErrors() {
-                $('.is-invalid').removeClass('is-invalid');
-                $('.invalid-feedback-server').text('');
-                $('.invalid-feedback-client').text('');
-            }
-
-            // Form submission handler
-            $('#kt_modal_form').on('submit', function (e) {
-                e.preventDefault();
-
-                var form = $(this);
-                var submitButton = $('#kt_modal_submit');
-                var formData = form.serialize();
-                var formAction = form.attr('action');
-                var formMethod = $('#form_method').val();
-
-                // Show loading state
-                submitButton.prop('disabled', true);
-                submitButton.find('.indicator-label').hide();
-                submitButton.find('.indicator-progress').show();
-
-                // Clear previous errors
-                clearValidationErrors();
-
-                $.ajax({
-                    url: formAction,
-                    type: formMethod === 'POST' ? 'POST' : 'PUT',
-                    data: formData,
-                    success: function (response) {
-                        if (response.success) {
-                            // Show success message
-                            if (response.toastr) {
-                                toastr[response.toastr.type](response.toastr.message, response.toastr.title);
-                            }
-
-                            // Hide modal
-                            $('#kt_modal_open').modal('hide');
-
-                            // Reload page after delay
-                            setTimeout(function () {
-                                window.location.reload();
-                            }, 1500);
-                        }
-                    },
-                    error: function (xhr) {
-                        // Reset button state
-                        submitButton.prop('disabled', false);
-                        submitButton.find('.indicator-label').show();
-                        submitButton.find('.indicator-progress').hide();
-
-                        if (xhr.status === 422) {
-                            // Validation errors
-                            var response = xhr.responseJSON;
-
-                            // Show error message
-                            if (response.toastr) {
-                                toastr[response.toastr.type](response.toastr.message, response.toastr.title);
-                            }
-
-                            // Display field errors
-                            $.each(response.errors, function (field, messages) {
-                                var input = $('[name="' + field + '"]');
-                                input.addClass('is-invalid');
-
-                                // Show server-side validation error below the input
-                                input.closest('.fv-row').find('.invalid-feedback-server').text(messages[0]);
-                            });
-                        } else {
-                            toastr.error('An error occurred. Please try again.', 'Error');
-                        }
-                    }
-                });
-            });
-
-            // Reset form when modal is closed
-            $('#kt_modal_open').on('hidden.bs.modal', function () {
-                $(this).find('form')[0].reset();
-                clearValidationErrors();
-            });
-        });
-
-        $('.show_confirm').click(function (event) {
-            event.preventDefault();
-            var form = $(this).closest("form");
-
-            swal({
-                title: "Are you sure ?",
-                text: "If you delete this, it will be gone forever.",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        form.submit();
-                    }
-                });
-        });
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
     </script>
 
 @endpush

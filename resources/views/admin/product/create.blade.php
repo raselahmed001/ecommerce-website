@@ -38,11 +38,6 @@
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
             <!--begin::Form-->
-<<<<<<< HEAD
-=======
-            {{--            <form action="{{ route('admin.products.store') }}" method="POST" id="kt_form"--}}
-            {{--                  class="form d-flex flex-column flex-lg-row" enctype="multipart/form-data">--}}
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
 
             <form
                 action="{{ isset($product->id) ? route('admin.products.update', $product->id) : route('admin.products.store') }}"
@@ -54,7 +49,6 @@
                 @if(isset($product->id))
                     @method('PUT')
                 @endif
-<<<<<<< HEAD
                 @if(isset($product->id))
                     @foreach(['image_one', 'image_two', 'image_three'] as $imageField)
                         @if($product->$imageField)
@@ -67,8 +61,6 @@
                 <!-- Hidden inputs for Tagify values -->
                 <input type="hidden" name="product_color" value="{{ old('product_color', $product->product_color ?? '') }}">
                 <input type="hidden" name="product_size" value="{{ old('product_size', $product->product_size ?? '') }}">
-=======
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
                 <!--begin::Aside column-->
                 <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
                     <!--begin::Product Images-->
@@ -323,10 +315,7 @@
                                         <option value="">Select Sub Category</option>
                                         <!-- Options will be populated by JavaScript -->
                                     </select>
-<<<<<<< HEAD
                                     <div class="invalid-feedback-server text-danger mt-1"></div>
-=======
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
                                 </div>
                             </div>
 
@@ -345,10 +334,7 @@
                                             </option>
                                         @endforeach
                                     </select>
-<<<<<<< HEAD
                                     <div class="invalid-feedback-server text-danger mt-1"></div>
-=======
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
 
                                 </div>
 
@@ -378,7 +364,6 @@
                                     <div class="invalid-feedback-server text-danger mt-1"></div>
                                 </div>
                             </div>
-<<<<<<< HEAD
                             <!-- Product Details -->
                             <div class="mb-10 col-12">
                                 <label class="form-label">Description</label>
@@ -389,19 +374,6 @@
                                 </div>
                             </div>
 
-=======
-
-
-                            <!-- Product Details -->
-                            <div>
-                                <label class="form-label">Description</label>
-                                <div id="kt_ecommerce_add_product_description"
-                                     name="kt_ecommerce_add_product_description" class="min-h-200px mb-2">{{ old('product_details', $product->product_details ?? '') }}</div>
-                                <div class="text-muted fs-7">Set a description to the product for better visibility.
-                                </div>
-
-                            </div>
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
                         </div>
                     </div>
                     <!--end::General options-->
@@ -422,13 +394,9 @@
                                         <div class="form-floating">
                                             <input type="number" class="form-control" id="selling_price"
                                                    name="selling_price"
-<<<<<<< HEAD
                                                    placeholder="0"
                                                    value="{{ old('selling_price', $product->selling_price ?? '') }}"
                                                    step="0.01" min="0"/>
-=======
-                                                   placeholder="0"  value="{{ old('selling_price', $product->selling_price ?? '') }}" step="0.01" min="0"/>
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
                                             <label for="selling_price" class="required">Selling Price</label>
                                             <div class="invalid-feedback-server text-danger mt-1"></div>
                                         </div>
@@ -439,13 +407,9 @@
                                         <div class="form-floating">
                                             <input type="number" class="form-control" id="discount_price"
                                                    name="discount_price"
-<<<<<<< HEAD
                                                    placeholder="0"
                                                    value="{{ old('discount_price', $product->discount_price ?? '') }}"
                                                    step="0.01" min="0"/>
-=======
-                                                   placeholder="0" value="{{ old('discount_price', $product->discount_price ?? '') }}" step="0.01" min="0"/>
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
                                             <label for="discount_price">Discount Price (%)</label>
 
                                         </div>
@@ -466,12 +430,8 @@
                         <div class="card-body pt-0">
                             <div class="form-floating">
                                 <input type="url" class="form-control" id="video_link" name="video_link"
-<<<<<<< HEAD
                                        placeholder="https://youtube.com/embed/..."
                                        value="{{ old('video_link', $product->video_link ?? '') }}"/>
-=======
-                                       placeholder="https://youtube.com/embed/..." value="{{ old('video_link', $product->video_link ?? '') }}"/>
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
                                 <label for="video_link">Video URL</label>
                             </div>
                         </div>
@@ -483,11 +443,7 @@
                         <button type="submit" id="kt_submit" class="btn btn-light-success">
                             <span class="indicator-label"><i class="fas fa-check-circle"></i> Submit</span>
                             <span class="indicator-progress">Please wait...
-<<<<<<< HEAD
                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-=======
-                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
                         </button>
                     </div>
                 </div>
@@ -497,33 +453,17 @@
         </div>
         <!--end::Container-->
     </div>
-<<<<<<< HEAD
     <style>
         .tox-tinymce {
             height: 300px !important;
         }
     </style>
-=======
-
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
 @endsection
 
 @push('scripts')
 
-<<<<<<< HEAD
     <script>
         $(document).ready(function () {
-=======
-    <!-- SweetAlert -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
-    <script src="{{ asset('js/common-form-handlers.js') }}"></script>
-
-
-    <script>
-        $(document).ready(function () {
-            // Initialize toastr
-            CommonFormHandlers.initToastr();
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
 
             // Initialize Tagify
             const initTagify = (selector) => {
@@ -597,7 +537,6 @@
                     categorySelect.val(productCategoryId).trigger('change');
                 }
             }
-<<<<<<< HEAD
 
         });
 
@@ -607,12 +546,3 @@
 
 
 
-=======
-            // Form submission handler
-            CommonFormHandlers.initPageFormSubmission('#kt_form', '#kt_submit');
-            CommonFormHandlers.initDeleteConfirmation();
-        });
-    </script>
-
-@endpush
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d

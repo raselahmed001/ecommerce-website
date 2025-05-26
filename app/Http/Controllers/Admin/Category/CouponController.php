@@ -14,11 +14,7 @@ class CouponController extends Controller
      */
     public function index()
     {
-<<<<<<< HEAD
         $data['coupons'] = Coupon::select('id', 'coupon_code','discount_amount')->get();
-=======
-        $data['coupons'] = Coupon::all();
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
         return view('admin.coupon.index', $data);
     }
 
