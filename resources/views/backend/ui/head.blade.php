@@ -27,6 +27,7 @@
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+<<<<<<< HEAD
 <style>
     /*.tox-editor-container{*/
     /*    height: 100px !important;*/
@@ -35,5 +36,7 @@
 
 </style>
 
+=======
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
 {{-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/tagmanager/3.0.2/tagmanager.min.css"> --}}
 

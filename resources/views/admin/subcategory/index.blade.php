@@ -120,7 +120,11 @@
                                 <td>
                                     <div class="ms-5 text-gray-800 text-hover-primary fs-5 fw-bolder mb-1"
                                          data-kt-ecommerce-category-filter="category_name">
+<<<<<<< HEAD
                                         {{ $subcategory->category->category_name ?? 'N/A'}}
+=======
+                                        {{ $subcategory->category->category_name }}
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
                                     </div>
                                 </td>
 

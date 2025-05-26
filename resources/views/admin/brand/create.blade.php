@@ -37,7 +37,11 @@
                                 <div class="card-body text-center pt-0">
                                     <div class="image-input image-input-empty image-input-outline mb-3"
                                          data-kt-image-input="true"
+<<<<<<< HEAD
                                          style="background-color: #f5f8fa; background-image: url('{{asset('backend/assets/media/svg/files/blank-image.svg')}}')">
+=======
+                                         style="background-color: #f5f8fa; background-image: url(assets/media/svg/files/blank-image.svg)">
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
                                         <div class="image-input-wrapper w-150px h-150px"></div>
                                         <!-- Change button -->
                                         <label
@@ -48,10 +52,14 @@
                                             <i class="bi bi-pencil-fill fs-7"></i>
                                             <input type="file" name="brand_logo" accept="image/*"/>
                                             <input type="hidden" name="brand_logo"/>
+<<<<<<< HEAD
 
 
                                         </label>
                                         <div class="invalid-feedback invalid-feedback-server text-danger"></div>
+=======
+                                        </label>
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
                                         <!-- Cancel button -->
                                         <span
                                             class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
@@ -68,10 +76,14 @@
                                             title="Remove avatar">
                                             <i class="bi bi-x fs-2"></i>
                                         </span>
+<<<<<<< HEAD
 
                                     </div>
                                     <!-- Error message container for brand_logo -->
                                     <div class="invalid-feedback invalid-feedback-server text-danger"></div>
+=======
+                                    </div>
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
                                 </div>
                             </div>
                         </div>
@@ -128,9 +140,27 @@
 
 
 @push('scripts')
+<<<<<<< HEAD
 
     <script>
         $(document).ready(function () {
+=======
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Initialize Toastr
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "timeOut": "2000"
+            };
+            //     $.ajaxSetup({
+            //     headers: {
+            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //     }
+            // });
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
 
             // Handle add button click
             $('#kt_modal_add').click(function () {
@@ -143,18 +173,31 @@
                 // You should also reset the image input here
                 var imageInput = $('[data-kt-image-input="true"]');
                 imageInput.addClass('image-input-empty');
+<<<<<<< HEAD
                 imageInput.find('.image-input-wrapper').css('background-image', 'url("{{ asset('backend/assets/media/svg/files/blank-image.svg') }}")');
                 CommonFormHandlers.clearValidationErrors();
             });
 
             // Handle edit button click
+=======
+                imageInput.find('.image-input-wrapper').css('background-image', 'url(assets/media/svg/files/blank-image.svg)');
+                clearValidationErrors();
+            });
+
+            // Handle edit button click
+
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
             $(document).on('click', '[data-id]', function () {
                 var brandId = $(this).data('id');
                 $('#modal_title').text('Edit Brand');
                 $('#submit_button_text').text('Update');
                 $('#form_method').val('PUT');
                 $('#kt_modal_form').attr('action', '/admin/brands/' + brandId);
+<<<<<<< HEAD
                 CommonFormHandlers.clearValidationErrors();
+=======
+                clearValidationErrors();
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
 
                 // Reset image input first
                 var imageInput = $('[data-kt-image-input="true"]');
@@ -195,8 +238,118 @@
                 });
             });
 
+<<<<<<< HEAD
         });
 
+=======
+            // Clear all validation errors
+            function clearValidationErrors() {
+                $('.is-invalid').removeClass('is-invalid');
+                $('.invalid-feedback-server').text('');
+                // $('.invalid-feedback-client').text('');
+            }
+
+            // Form submission handler
+
+            $('#kt_modal_form').on('submit', function (e) {
+                e.preventDefault();
+
+                var form = $(this);
+                var submitButton = $('#kt_modal_submit');
+                var formData = new FormData(this);
+                var formAction = form.attr('action');
+                var formMethod = $('#form_method').val();
+
+                if (formMethod === 'PUT') {
+                    formData.append('_method', 'PUT');
+                }
+                // Show loading state
+                submitButton.prop('disabled', true);
+                submitButton.find('.indicator-label').hide();
+                submitButton.find('.indicator-progress').show();
+
+                // Clear previous errors
+                clearValidationErrors();
+
+                $.ajax({
+                    url: formAction,
+                    type: 'POST',
+                    data: formData,
+                    processData: false,  // ফাইল আপলোডের জন্য জরুরি
+                    contentType: false,
+
+
+                    success: function (response) {
+                        if (response.success) {
+                            // Show success message
+                            if (response.toastr) {
+                                toastr[response.toastr.type](response.toastr.message, response.toastr.title);
+                            }
+
+                            // Hide modal
+                            $('#kt_modal_open').modal('hide');
+
+                            // Reload page after delay
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 1500);
+                        }
+                    },
+                    error: function (xhr) {
+                        // Reset button state
+                        submitButton.prop('disabled', false);
+                        submitButton.find('.indicator-label').show();
+                        submitButton.find('.indicator-progress').hide();
+
+                        if (xhr.status === 422) {
+                            // Validation errors
+                            var response = xhr.responseJSON;
+
+                            // Show error message
+                            if (response.toastr) {
+                                toastr[response.toastr.type](response.toastr.message, response.toastr.title);
+                            }
+
+                            // Display field errors
+                            $.each(response.errors, function (field, messages) {
+                                var input = $('[name="' + field + '"]');
+                                input.addClass('is-invalid');
+
+                                // Target the closest invalid-feedback element
+                                input.closest('.form-floating').find('.invalid-feedback-server').text(messages[0]);
+                            });
+                        } else {
+                            toastr.error('An error occurred. Please try again.', 'Error');
+                        }
+                    }
+                });
+            });
+
+            // Reset form when modal is closed
+            $('#kt_modal_open').on('hidden.bs.modal', function () {
+                $(this).find('form')[0].reset();
+                clearValidationErrors();
+            });
+        });
+
+        $('.show_confirm').click(function (event) {
+            event.preventDefault();
+            var form = $(this).closest("form");
+
+            swal({
+                title: "Are you sure ?",
+                text: "If you delete this, it will be gone forever.",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        form.submit();
+                    }
+                });
+        });
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
     </script>
 
 @endpush

@@ -46,6 +46,7 @@ return [
             'throw' => false,
             'report' => false,
         ],
+<<<<<<< HEAD
         'products' => [
             'driver' => 'local',
             'root' => public_path('uploads/products'),
@@ -53,6 +54,8 @@ return [
             'visibility' => 'public',
             'throw' => false,
         ],
+=======
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
 
         's3' => [
             'driver' => 's3',

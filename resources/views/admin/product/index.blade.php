@@ -57,13 +57,18 @@
                          id="kt_menu_624475cf75c38">
                         <!--begin::Header-->
                         <div class="px-7 py-5">
+<<<<<<< HEAD
                             <div class="fs-5 text-dark fw-bolder">Product Filters</div>
+=======
+                            <div class="fs-5 text-dark fw-bolder">Filter Options</div>
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
                         </div>
                         <!--end::Header-->
                         <!--begin::Menu separator-->
                         <div class="separator border-gray-200"></div>
                         <!--end::Menu separator-->
                         <!--begin::Form-->
+<<<<<<< HEAD
                         <form method="GET" action="{{ route('admin.products.index') }}">
                             <div class="px-7 py-5">
                                 <!--begin::Input group-->
@@ -142,6 +147,70 @@
                                 <!--end::Actions-->
                             </div>
                         </form>
+=======
+                        <div class="px-7 py-5">
+                            <!--begin::Input group-->
+                            <div class="mb-10">
+                                <!--begin::Label-->
+                                <label class="form-label fw-bold">Status:</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <div>
+                                    <select class="form-select form-select-solid" data-kt-select2="true"
+                                            data-placeholder="Select option"
+                                            data-dropdown-parent="#kt_menu_624475cf75c38"
+                                            data-allow-clear="true">
+                                        <option></option>
+                                        <option value="1">Active</option>
+                                        <option value="2">Inactive</option>
+                                    </select>
+                                </div>
+                                <!--end::Input-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="mb-10">
+                                <!--begin::Label-->
+                                <label class="form-label fw-bold">Member Type:</label>
+                                <!--end::Label-->
+                                <!--begin::Options-->
+                                <div class="d-flex">
+                                    <!--begin::Options-->
+                                    <label class="form-check form-check-sm form-check-custom form-check-solid">
+                                        <input class="form-check-input" type="checkbox" value="2" checked="checked"/>
+                                        <span class="form-check-label">Customer</span>
+                                    </label>
+                                    <!--end::Options-->
+                                </div>
+                                <!--end::Options-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="mb-10">
+                                <!--begin::Label-->
+                                <label class="form-label fw-bold">Notifications:</label>
+                                <!--end::Label-->
+                                <!--begin::Switch-->
+                                <div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
+                                    <input class="form-check-input" type="checkbox" value="" name="notifications"
+                                           checked="checked"/>
+                                    <label class="form-check-label">Enabled</label>
+                                </div>
+                                <!--end::Switch-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Actions-->
+                            <div class="d-flex justify-content-end">
+                                <button type="reset" class="btn btn-sm btn-light btn-active-light-primary me-2"
+                                        data-kt-menu-dismiss="true">Reset
+                                </button>
+                                <button type="submit" class="btn btn-sm btn-primary"
+                                        data-kt-menu-dismiss="true">Apply
+                                </button>
+                            </div>
+                            <!--end::Actions-->
+                        </div>
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
                         <!--end::Form-->
                     </div>
                     <!--end::Menu 1-->
@@ -295,7 +364,11 @@
                                         </span>
 
                                     </a>
+<<<<<<< HEAD
 
+=======
+                                    {{--                                    test--}}
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
                                     <div
                                         class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4"
                                         data-kt-menu="true">
@@ -328,7 +401,11 @@
                                                         class="d-flex justify-content-center align-items-center btn btn-sm
                                                           {{ $product->status ? 'btn-light-warning' : 'btn-light-success' }}
                                                           text-hover-white"
+<<<<<<< HEAD
                                                         style="height: 30px; width: 100px;">
+=======
+                                                        style="height: 30px; width: 100px;" >
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
                                                     <i class="bi {{ $product->status ? 'bi-x-circle' : 'bi-check-circle' }} me-1"></i>
                                                     {{ $product->status ? 'Deactivate' : 'Activate' }}
                                                 </button>
@@ -368,12 +445,41 @@
                 <!--end::Card body-->
             </div>
             <!--end::Category-->
+<<<<<<< HEAD
         </div>
+=======
+        </div>ñ
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
         <!--end::Container-->
     </div>
     <!--end::Post-->
 
 @endsection
+<<<<<<< HEAD
 
 
 
+=======
+@push('scripts')
+
+    @if(Session::has('toastr'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Configure toastr options
+                toastr.options = {
+                    closeButton: true,
+                    progressBar: true,
+                    positionClass: "toast-top-right",
+                    timeOut: "2000"
+                };
+
+                // Display the toastr message
+                toastr.{{ Session::get('toastr.type') }}(
+                    '{{ Session::get('toastr.message') }}',
+                    '{{ Session::get('toastr.title') }}'
+                );
+            });
+        </script>
+    @endif
+@endpush
+>>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
