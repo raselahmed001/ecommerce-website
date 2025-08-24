@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\Category\BrandController;
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Category\CouponController;
 use App\Http\Controllers\Admin\Category\SubCategoryController;
+use App\Http\Controllers\Admin\PostCategoryController;
+use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\Frontend\NewsLaterController;
@@ -49,6 +51,9 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
 
     Route::post('inactive/products/{product}', [ProductController::class, 'toggleStatus'])
         ->name('products.toggle-status');
+
+    Route::resource('blogs-categories', PostCategoryController::class);
+    Route::resource('blogs-posts', PostController::class);
 });
 
 Route::prefix('user')->middleware(['auth', 'user'])->name('user.')->group(function () {

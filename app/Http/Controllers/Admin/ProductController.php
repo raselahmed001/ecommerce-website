@@ -21,7 +21,7 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-//        $query = Product::select('id')->with('category:id,category_name', 'brand:id,brand_name')->orderBy('id', 'desc');
+        //                $query = Product::select('id')->with('category:id,category_name', 'brand:id,brand_name')->orderBy('id', 'desc');//best practice
         $query = Product::all()->withRelationshipAutoloading();
 
         // Status filter
@@ -70,7 +70,7 @@ class ProductController extends Controller
                 ->get(),
             'brands' => Brand::select('id', 'brand_name')->orderBy('brand_name')->get(),
             'subcategories' => collect()
-//            'subcategories' => SubCategory::select('id', 'sub_category_name')->orderBy('sub_category_name')->get(),
+            //            'subcategories' => SubCategory::select('id', 'sub_category_name')->orderBy('sub_category_name')->get(),
         ]);
     }
 
@@ -85,7 +85,7 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-//        dd($request->all());
+        //        dd($request->all());
         DB::beginTransaction();
         try {
             $validated = $request->validated();
@@ -157,7 +157,6 @@ class ProductController extends Controller
                     'message' => 'Product added successfully'
                 ]
             ]);
-
         } catch (\Exception $e) {
             DB::rollBack();
 
@@ -217,11 +216,11 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-//        $product->load([
-//            'category',
-//            'subCategory',
-//            'brand'
-//        ]);
+        //                $product->load([
+        //                    'category',
+        //                    'subCategory',
+        //                    'brand'
+        //                ]);
         $product->withRelationshipAutoloading();
 
 
@@ -258,7 +257,7 @@ class ProductController extends Controller
 
             foreach ($imageFields as $field) {
                 // Handle image removal
-                if ($request->has($field.'_remove') && $request->input($field.'_remove') == '1') {
+                if ($request->has($field . '_remove') && $request->input($field . '_remove') == '1') {
                     $this->deleteImage($product->$field);
                     $imagePaths[$field] = null;
                 }
@@ -291,7 +290,6 @@ class ProductController extends Controller
                     'message' => 'Product updated successfully'
                 ]
             ]);
-
         } catch (\Exception $e) {
             DB::rollBack();
             return $this->jsonError($e->getMessage());
@@ -300,7 +298,7 @@ class ProductController extends Controller
 
     private function storeImage($image, $productName)
     {
-        $filename = Str::slug($productName).'-'.time().'-'.Str::random(5).'.'.$image->getClientOriginalExtension();
+        $filename = Str::slug($productName) . '-' . time() . '-' . Str::random(5) . '.' . $image->getClientOriginalExtension();
         $path = 'uploads/images/product/';
 
         $fullPath = public_path($path);
@@ -313,9 +311,9 @@ class ProductController extends Controller
                 $constraint->aspectRatio();
                 $constraint->upsize();
             })
-            ->save($fullPath.$filename);
+            ->save($fullPath . $filename);
 
-        return $path.$filename;
+        return $path . $filename;
     }
 
     private function deleteImage($path)
@@ -329,7 +327,7 @@ class ProductController extends Controller
     {
         return response()->json([
             'success' => false,
-            'message' => 'Error: '.$message,
+            'message' => 'Error: ' . $message,
             'toastr' => [
                 'type' => 'error',
                 'title' => 'Error',
@@ -355,10 +353,8 @@ class ProductController extends Controller
                 'message' => 'Product deleted successfully',
                 'title' => 'Deleted'
             ]);
-
         } catch (\Exception $e) {
             return $this->jsonError($e->getMessage());
         }
     }
-
 }

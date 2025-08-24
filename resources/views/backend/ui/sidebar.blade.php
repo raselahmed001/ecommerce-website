@@ -63,6 +63,8 @@
                         <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{
                             request()->routeIs('admin.categories.*') ||
                             request()->routeIs('admin.subcategories.*') ||
+                            request()->routeIs('admin.blogs-categories.*') ||
+                            request()->routeIs('admin.blogs-posts.*') ||
                             request()->routeIs('admin.brands.*') ? 'here show' : ''
                         }}">
                             <span class="menu-link">
@@ -75,6 +77,8 @@
                             <div class="menu-sub menu-sub-accordion {{
                                 request()->routeIs('admin.categories.*') ||
                                 request()->routeIs('admin.subcategories.*') ||
+                                request()->routeIs('admin.blogs-categories.*') ||
+                                request()->routeIs('admin.blogs-posts.*') ||
                                 request()->routeIs('admin.brands.*') ? 'show' : ''
                             }}">
                                 <div class="menu-item">
@@ -138,6 +142,62 @@
                                             <i class="fas fa-list" style="color: #ffffff;"></i>
                                         </span>
                                         <span class="menu-title">All Product</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Blog Category items -->
+
+                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{
+                            request()->routeIs('admin.blogs-categories.*') ? 'here show' : ''
+                         }}">
+                            <span class="menu-link">
+                                <span class="menu-bullet">
+                                   <i class="fas fa-blog" style="color: #ffffff;"></i>
+                                </span>
+                                <span class="menu-title"> Blog</span>
+                                <span class="menu-arrow"></span>
+                            </span>
+                            <div class="menu-sub menu-sub-accordion menu-active-bg {{
+                                request()->routeIs('admin.blogs-categories.*') ? 'show' : ''
+                            }}">
+
+                                <div class="menu-item">
+                                    <a class="menu-link {{ request()->routeIs('admin.blogs-categories.*') ? 'active' : '' }}"
+                                       href="{{ route('admin.blogs-categories.index') }}">
+                                        <span class="menu-bullet">
+                                            <i class="fas fa-list" style="color: #ffffff;"></i>
+                                        </span>
+                                        <span class="menu-title">All Blog Category</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Post Blog items -->
+
+                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{
+                            request()->routeIs('admin.blogs-posts.*') ? 'here show' : ''
+                         }}">
+                            <span class="menu-link">
+                                <span class="menu-bullet">
+                                   <i class="fas fa-pen-square" style="color: #ffffff;"></i>
+                                </span>
+                                <span class="menu-title"> Blog Post</span>
+                                <span class="menu-arrow"></span>
+                            </span>
+                            <div class="menu-sub menu-sub-accordion menu-active-bg {{
+                                request()->routeIs('admin.blogs-posts.*') ? 'show' : ''
+                            }}">
+
+                                <div class="menu-item">
+                                    <a class="menu-link {{ request()->routeIs('admin.blogs-categories.*') ? 'active' : '' }}"
+                                       href="{{ route('admin.blogs-posts.index') }}">
+                                        <span class="menu-bullet">
+                                            <i class="fas fa-list" style="color: #ffffff;"></i>
+                                        </span>
+                                        <span class="menu-title">All Blog Post</span>
                                     </a>
                                 </div>
                             </div>

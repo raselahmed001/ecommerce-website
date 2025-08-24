@@ -14,19 +14,16 @@
         "laravel/framework": "^12.0",
         "laravel/helpers": "^1.7",
         "laravel/tinker": "^2.10.1",
-<<<<<<< HEAD
         "laravel/ui": "^4.6",
         "mews/purifier": "^3.4"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.15",
         "beyondcode/laravel-query-detector": "^2.1",
-=======
         "laravel/ui": "^4.6"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.15",
->>>>>>> 9a955228f4c04072fa4e46bf20ddfec168f1d60d
         "fakerphp/faker": "^1.23",
         "laravel/pail": "^1.2.2",
         "laravel/pint": "^1.13",

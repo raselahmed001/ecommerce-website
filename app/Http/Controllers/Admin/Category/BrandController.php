@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Category;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Brand;
+use App\Traits\JsonResponseTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -12,6 +13,7 @@ use Intervention\Image\Laravel\Facades\Image;
 
 class BrandController extends Controller
 {
+    use JsonResponseTrait;
     /**
      * Display a listing of the resource.
      */
@@ -44,15 +46,7 @@ class BrandController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'errors' => $validator->errors(),
-                'toastr' => [
-                    'type' => 'error',
-                    'message' => $validator->errors()->first(),
-                    'title' => 'Validation Error'
-                ]
-            ], 422);
+            return $this->validationErrorResponse($validator);
         }
 
         try {
@@ -75,16 +69,11 @@ class BrandController extends Controller
             ]);
 
             DB::commit();
-
-            return response()->json([
-                'success' => true,
-                'toastr' => [
-                    'type' => 'success',
-                    'message' => 'Brand created successfully',
-                    'title' => 'Brand Success'
-                ],
-                'redirect' => route('admin.brands.index')
-            ]);
+            return $this->successResponse(
+                'Brand created successfully',
+                'Brand Success',
+                'admin.brands.index'
+            );
 
         } catch (\Exception $e) {
             DB::rollBack();
@@ -95,16 +84,10 @@ class BrandController extends Controller
                 @unlink($imageName);
             }
 
-            return response()->json([
-                'success' => false,
-                'toastr' => [
-                    'type' => 'error',
-                    'message' => 'An error occurred while creating the brand',
-                    'title' => 'Brand Error'
-
-                ],
-
-            ]);
+            return $this->errorMessageResponse(
+                'An error occurred while creating the brand',
+                'Brand Error'
+            );
         }
     }
 
@@ -121,20 +104,11 @@ class BrandController extends Controller
      */
     public function edit(Brand $brand)
     {
-        if (!$brand) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Brand not found'
-            ], 404);
-        }
-
-        return response()->json([
-            'success' => true,
-            'data' => [
-                'brand_name' => $brand->brand_name,
-                'brand_logo' => $brand->brand_logo ? asset('/uploads/images/brand/' . $brand->brand_logo) : null
-
-            ]
+        return $this->dataResponse([
+            'brand_name' => $brand->brand_name,
+            'brand_logo' => $brand->brand_logo
+                ? asset('/uploads/images/brand/' . $brand->brand_logo)
+                : null,
         ]);
     }
 
@@ -149,15 +123,7 @@ class BrandController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'errors' => $validator->errors(),
-                'toastr' => [
-                    'type' => 'error',
-                    'message' => $validator->errors()->first(),
-                    'title' => 'Validation Error'
-                ]
-            ], 422);
+            return $this->validationErrorResponse($validator);
         }
 
         try {
@@ -187,15 +153,12 @@ class BrandController extends Controller
             }
             $brand->update($data);
             DB::commit();
-            return response()->json([
-                'success' => true,
-                'toastr' => [
-                    'type' => 'success',
-                    'message' => 'Brand updated successfully',
-                    'title' => 'Brand Success'
-                ],
-                'redirect' => route('admin.brands.index')
-            ]);
+
+            return $this->successResponse(
+                'Brand update successfully',
+                'Brand Success',
+                'admin.brands.index'
+            );
 
         } catch (\Exception $e) {
             DB::rollBack();
@@ -206,14 +169,11 @@ class BrandController extends Controller
                 @unlink($imageName);
             }
 
-            return response()->json([
-                'success' => false,
-                'toastr' => [
-                    'type' => 'error',
-                    'message' => 'An error occurred while updating the brand: ' . $e->getMessage(),
-                    'title' => 'Brand Error'
-                ],
-            ], 500);
+            return $this->errorMessageResponse(
+                'An error occurred while updating the brand',
+                'Brand Error'
+            );
+
         }
     }
 
@@ -238,20 +198,12 @@ class BrandController extends Controller
             // Delete the brand record
             $brand->delete();
             DB::commit();
-            return redirect()->route('admin.brands.index')->with('toastr', [
-                'type' => 'success',
-                'message' => 'Brand deleted successfully',
-                'title' => 'Brand Success'
-            ]);
+            return $this->redirectSuccess('admin.brands.index', 'Brand deleted successfully', 'Brand Success');
 
         } catch (\Exception $e) {
             DB::rollBack();
+            return $this->redirectError('admin.brands.index', 'Failed to delete brand', 'Brand Error');
 
-            return redirect()->back()->with('toastr', [
-                'type' => 'error',
-                'message' => 'Failed to delete brand: ' . $e->getMessage(),
-                'title' => 'Error'
-            ]);
         }
     }
 }

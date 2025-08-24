@@ -46,6 +46,7 @@ class SubCategoryController extends Controller
                 'sub_category_name' => $validated['sub_category_name']
             ]);
 
+
             return response()->json([
                 'success' => true,
                 'toastr' => [

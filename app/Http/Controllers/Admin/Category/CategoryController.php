@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Admin\Category;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Category;
+use App\Traits\JsonResponseTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
+    use JsonResponseTrait;
     /**
      * Display a listing of the resource.
      */
@@ -41,30 +43,18 @@ class CategoryController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'errors' => $validator->errors(),
-                'toastr' => [
-                    'type' => 'error',
-                    'message' => $validator->errors()->first(),
-                    'title' => 'Validation Error'
-                ]
-            ], 422);
+            return $this->validationErrorResponse($validator);
         }
 
         $category = new Category();
         $category->category_name = $request->category_name;
         $category->save();
 
-        return response()->json([
-            'success' => true,
-            'toastr' => [
-                'type' => 'success',
-                'message' => 'Category created successfully',
-                'title' => 'Category Success'
-            ],
-            'redirect' => route('admin.categories.index')
-        ]);
+        return $this->successResponse(
+            'Category created successfully',
+            'Category Success',
+            'admin.categories.index'
+        );
     }
 
     /**
@@ -81,18 +71,9 @@ class CategoryController extends Controller
 
     public function edit(Category $category)
     {
-        if (!$category) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Category not found'
-            ], 404);
-        }
+        return $this->dataResponse([
+            'category_name' => $category->category_name,
 
-        return response()->json([
-            'success' => true,
-            'data' => [
-                'category_name' => $category->category_name
-            ]
         ]);
     }
 
@@ -106,29 +87,18 @@ class CategoryController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'errors' => $validator->errors(),
-                'toastr' => [
-                    'type' => 'error',
-                    'message' => $validator->errors()->first(),
-                    'title' => 'Validation Error'
-                ]
-            ], 422);
+            return $this->validationErrorResponse($validator);
         }
 
         $category->category_name = $request->category_name;
         $category->save();
 
-        return response()->json([
-            'success' => true,
-            'toastr' => [
-                'type' => 'success',
-                'message' => 'Category updated successfully',
-                'title' => 'Category Success'
-            ],
-            'redirect' => route('admin.categories.index')
-        ]);
+        return $this->successResponse(
+            'Category updated successfully',
+            'Category Success',
+            'admin.categories.index'
+        );
+
     }
 
     /**
@@ -137,11 +107,8 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return redirect()->route('admin.categories.index')->with('toastr', [
-            'type' => 'success',
-            'message' => 'Category deleted successfully',
-            'title' => 'Category Success'
-        ]);
+
+        return $this->redirectSuccess('admin.categories.index', 'Category deleted successfully', 'Category Success');
     }
 
 }
